@@ -1,0 +1,40 @@
+Project name is TameOfThrones  that allows to check for allies by encoding and decoding cipher text.
+
+
+
+It includes dto/DTO layer which is to send data among the layers for performing action.
+
+models/DTOEntity which has all the parameters of the input .txt file
+
+repository/Repository is to read the input .txt file and map it to DTOEntity list
+
+repository/CipherMap is to store the  kingdom's respective ciphers
+
+service/KingdomServices adds the logic to check whether the cipher sent to the kingdom matches the true cipher
+
+service/TrueCipher return's the map of frequency of characters in the true cipher of the respective kingdom
+
+service/CipherCharCount return's the frequency of of decoded (if sent from input .txt) characters
+
+Main displays the output
+
+
+
+To run unit test -->
+gradle build
+RunAs -> JUnit test
+
+
+
+Using
+gradle  clean build
+java -jar geektrust.jar <path_to_input_file>
+//then input the input.txt file
+<input_text_file>
+
+
+
+Input is .txt file and if non-empty then it starts from the first line of the file
+
+
+

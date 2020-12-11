@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'jacoco'
+}
+
+group = 'com.example'
+version = '1.0'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+mainClassName = 'com.allies.Geektrust'
+
+
+jar {
+    archiveBaseName = 'geektrust' //Please do not change this final artifact name
+    archiveVersion = null   //Please do not change this final artifact version
+    version = null   //Please do not change this final artifact version
+    
+    manifest {
+        attributes 'Main-Class' : 'com.allies.Geektrust' //Change this to the main class of your program which will be executed
+    }
+    // To create a single jar with all dependencies.
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } {
+        exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
+    }
+}
+
+repositories {
+     mavenCentral()
+}
+//Add your dependencies here
+dependencies {
+	compileOnly 'org.projectlombok:lombok:1.18.16'
+	annotationProcessor 'org.projectlombok:lombok:1.18.16'
+	
+	testCompileOnly 'org.projectlombok:lombok:1.18.16'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
+	
+	testImplementation('org.junit.jupiter:junit-jupiter-api:5.5.1')
+    testRuntime('org.junit.jupiter:junit-jupiter-engine:5.5.1')
+    
+}
+
+test {
+	useJUnitPlatform()
+	finalizedBy jacocoTestReport
+}
+jacoco {
+    toolVersion = "0.8.5"
+    reportsDir = file("$buildDir/jacoco")
+}
+jacocoTestReport {
+  dependsOn test
+}
